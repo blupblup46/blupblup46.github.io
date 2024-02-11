@@ -16,13 +16,6 @@
     --white: #efefef;
   }
 
-<<<<<<< Updated upstream:style.css
-=======
-/* #Skills{
-    display: none;
-} */
-
-
 .previousButton{
     transform: rotate(180deg);
 }
@@ -36,7 +29,6 @@
 .image-button:hover{
     cursor: pointer;
 }
->>>>>>> Stashed changes:pages/style.css
 
 body{
     z-index: 0;
@@ -46,9 +38,8 @@ body{
     text-justify: auto;
 }
 
-
 p{
-    font-family: PWix;
+    font-family: PWix, Arial, Helvetica, sans-serif;
     line-height: 1.25em;
     text-align: left;
     padding: 0em 2em;
@@ -58,39 +49,52 @@ strong, h1{
     color: var(--mainColor);
 }
 
+h1, h2, h3, h4{
+    font-family: PWix, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
 h1{
     font-size: 3em;
-    font-family: PWixBold;
+    text-align: center;
+
 }
 
 h2{
     font-size: 1.5em;
-    font-family: PWixBold;
     text-align: center;
     width: 100%;
 }
 
-h3{
-    font-family: PWixBold;
+h3, h4{
     padding: 0em;
     margin: 0em;
 }
 
-h2, h3, a{
+h4{
+    font-size: 1em;
+}
+
+h2, h3, h4, a{
     color: var(--secondaryColor);
 
 }
 
 ul{
+    font-family: PWix, Arial, Helvetica, sans-serif;
     list-style: none;
     padding: 0em;
     margin: 0em;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     height: 50%;
     margin: 1.5em;
+}
 
+summary{
+    font-family: PWix, Arial, Helvetica, sans-serif;
+    /* font-weight: bold; */
 }
 
 .underlined{
@@ -103,7 +107,6 @@ ul{
 
 .visible{
     display: flex;
-    width: 50%;
     z-index: 1000;
 }
 
@@ -211,6 +214,10 @@ body nav + nav{
     
 }
 
+body nav + nav ul{
+    height: auto;
+}
+
 body nav + nav details{
     margin: 1em;
 }
@@ -237,19 +244,19 @@ main[activePage="Intro"] article{
 }
 
 main[activePage="Intro"] article>figure img{
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
 }
 
 main[activePage="Intro"] article:last-child{
     margin-top: 5%;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 
 main[activePage="Intro"] article:last-child img{
-    height: 10vh;
-    margin: 1em;
+    max-height: 5em;
 }
 
 main[activePage="Intro"] article:last-child img:hover{
@@ -264,7 +271,7 @@ main[activePage="Projects"]{
     align-items: center;
 }
 
-main[activePage="Projects"] img{
+main[activePage="Projects"] div figure img{
     width: 40vh;
 }
 
@@ -280,16 +287,6 @@ main[activePage="Projects"] .project-container{
 }
 
 
-main[activePage="Projects"] .previousButton{
-    transform: rotate(180deg);
-}
-
-main[activePage="Projects"] .image-button{
-    height: 50px;
-    width: 50px;
-    border: none;
-}
-
 main[activePage="Projects"] .figures-container{
     display: flex;
     flex-direction: row-reverse;
@@ -299,8 +296,8 @@ main[activePage="Projects"] .figures-container figure{
     margin: 0px;
 }
 
-main[activePage="Projects"] .image-button:hover{
-    cursor: pointer;
+main[activePage="Projects"] .project-container{
+    padding: 1em;
 }
 
 /* EDUCATION */
@@ -323,6 +320,10 @@ main[activePage="Education"] section{
     width: 70%;
 }
 
+main[activePage="Education"] section figure {
+   margin: 0;
+   padding: 0;
+}
 
 main[activePage="Education"] section > div{
     display: flex;
@@ -342,23 +343,158 @@ main[activePage="Education"] img{
     max-width: 100%;
     height: auto;    
     display: block;  
-    margin: auto; 
+    margin: 0;
+    padding: 0; 
 }
 
+/* Experiences */
 
-@media (height< 600px) , (width< 1000px){
-    main[activePage="Intro"] article:last-child{
-        display:none;
-    }
+main[activePage="Experiences"] p{
+    padding: 0;
+    margin: 0;
+}
+
+main[activePage="Experiences"] h1{
+    padding: 0;
+    margin: 0;
+}
+
+main[activePage="Experiences"] article{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: center;
+    padding: 0 5em;
+}
+
+main[activePage="Experiences"] section:first-of-type{
+    display: flex;
+    flex-direction: row;
+}
+
+main[activePage="Experiences"] section:first-of-type section{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+main[activePage="Experiences"] div{
+    padding-bottom: 1em;
+}
+
+main[activePage="Experiences"] .description{
+    width: 100%;
+}
+
+/* CONTACT */
+
+main[activePage="Contact"] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+main[activePage="Contact"] figure img{
+    width: 60%;
+}
+
+main[activePage="Contact"] article{
+    margin: 1em;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 1px grey;
+    min-height: 40%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main[activePage="Contact"] p{
+   text-align: center;
+   font-size: 1.25em;
+   vertical-align: baseline;
+
+}
+
+main[activePage="Contact"] p a img{
+    height: 30px;
+    vertical-align: top;
+
+ 
+ }
+
+
+
+@media (width < 1300px){
+
+  
 
     main[activePage="Intro"], main[activePage="Intro"] article{
         flex-direction: column;
     }
 
-    main[activePage="Intro"] article img{
-        width: 70%;
+    main[activePage="Intro"] article:last-child{
+        flex-direction: row;
+
     }
 
+    main[activePage="Intro"] img{
+        width: 70px;
+    }
+
+    main[activePage="Intro"] article > figure img{
+        width: 80%;
+    }
+
+
+    main[activePage="Projects"] div.project-container{
+        flex-direction: column-reverse;
+    }
+
+    main[activePage="Projects"] {
+        flex-direction: column;
+    }
+
+    main[activePage="Projects"] div figure img {
+        width:30vh;
+    }
+
+    main[activePage="Experiences"] section:first-of-type{
+        display: flex;
+        flex-direction: column;
+    }
+
+    main[activePage="Experiences"] article{
+        padding: 10px;
+    }
+
+    main[activePage="Contact"] {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    main[activePage="Contact"] figure img{
+        width: auto;
+        height: 80px;
+    }
+
+    main[activePage="Contact"] article{
+        margin: 0.5em;
+        border-radius: 20px;
+        box-shadow: 5px 5px 10px 1px grey;
+        min-height: auto;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (width < 750px){
+  
 
     body main{
        margin-top: 1em !important;
@@ -392,16 +528,5 @@ main[activePage="Education"] img{
         left:50%;
     }
 
-    main[activePage="Projects"] div.project-container{
-        flex-direction: column-reverse;
-    }
-
-    main[activePage="Projects"] {
-        flex-direction: column;
-    }
-
-    main[activePage="Projects"] img {
-        width:30vh;
-    }
-
+   
 }

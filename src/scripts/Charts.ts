@@ -1,4 +1,4 @@
-import { Chart } from 'chart.js/auto'
+import { Chart } from "chart.js/auto";
 
 enum ChartType {
     PIE = "pie",
@@ -23,7 +23,7 @@ abstract class ChartBuilder {
         }
     }
 
-    private chart;
+    chart;
     private labels: string[];
 
 
@@ -37,7 +37,7 @@ abstract class ChartBuilder {
                     labels: labels,
                     datasets: [
                         {
-                            data: labels.map(row => this.getRandom()),
+                            data: labels.map(() => this.getRandom(100)),
                             borderRadius: 10
                         }
                     ]
@@ -46,35 +46,39 @@ abstract class ChartBuilder {
             }
         )
 
-        setInterval(this.updateChart, 1000)
+        setInterval(() => {
+            this.chart.data.datasets[0].data = this.labels.map(() => this.getRandom(100));
+            this.chart.update();
+        }, this.getRandom(2000, 1000))
     }
 
-    getRandom(): number {
-        return Math.random() * 100;
+    getRandom(max: number, min: number = 0): number {
+        return Math.random() * (max - min) + min;
     }
 
-    private updateChart() {
-        this.chart.data.datasets[0].data = this.labels.map(() => this.getRandom());
-        this.chart.update();
-    }
 }
 
 
 export class Bar extends ChartBuilder {
 
-
-    private data = [
-        { skill: "Typescript", count: this.getRandom() },
-        { skill: "Prometheus", count: this.getRandom() },
-        { skill: "Java", count: this.getRandom() },
-        { skill: "Springboot", count: this.getRandom() },
-        { skill: "Grafana", count: this.getRandom() },
-        { skill: "PromQL", count: this.getRandom() },
-        { skill: 2016, count: this.getRandom() },
-    ];
-
-    constructor(){
+    constructor() {
         super(ChartType.BAR, ["Typescript", "Prometheus", "Java"]);
+    }
+
+}
+
+export class Pie extends ChartBuilder {
+
+    constructor() {
+        super(ChartType.PIE, ["Typescript", "Prometheus", "Java"]);
+    }
+
+}
+
+export class Radar extends ChartBuilder {
+
+    constructor() {
+        super(ChartType.RADAR, ["Typescript", "Prometheus", "Java"]);
     }
 
 }

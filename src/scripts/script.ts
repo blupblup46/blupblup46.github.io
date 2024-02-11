@@ -1,79 +1,10 @@
-<<<<<<< Updated upstream:scripts/script.ts
-// import { ExperiencesLoader } from "./Experiences";
-import Chart from '../node_modules/chart.js/auto'
-import projects from './project.json';
-
-console.log("ui")
-let chart: Chart;
-
-function getRandom() {
-  return Math.random() * 100;
-}
-
-function generateCanvas() {
-  console.log("gen")
-
-  const data = [
-    { year: 2010, count: getRandom() },
-    { year: 2011, count: getRandom() },
-    { year: 2012, count: getRandom() },
-    { year: 2013, count: getRandom() },
-    { year: 2014, count: getRandom() },
-    { year: 2015, count: getRandom() },
-    { year: 2016, count: getRandom() },
-  ];
-
-  console.log(chart)
-  if (chart == null) {
-    chart = new Chart(
-      document.getElementById('acquisitions') as HTMLCanvasElement,
-      {
-        type: 'bar',
-        data: {
-          labels: data.map(row => row.year),
-          datasets: [
-            {
-              data: data.map(row => row.count),
-              borderRadius: 10
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-         
-          scales: {
-            y: {
-              display: false
-            }
-          },
-
-          plugins:{
-            legend: {
-              display: false
-            }
-          }
-        }
-      }
-    )
-  } else {
-    chart.data.datasets.forEach(dataset => {
-      dataset.data = data.map(row => row.count);
-    });
-
-    chart.update();
-  }
-
-}
-
-setInterval(generateCanvas, 1000)
-=======
-import { Bar } from "./Charts.js";
+import { Bar, Pie, Radar } from "./Charts.js";
 import { appendChildren, changeImage, createElement, createImgAsButton } from "./DOM.js";
 import { ExperiencesLoader } from "./Experiences.js";
-import type { Image, Project } from './utils.js';
-import { CssClasses, Viewer } from './utils.js';
->>>>>>> Stashed changes:src/scripts/script.ts
+import type { Project } from './utils.js';
+import {CssClasses, Viewer } from './utils.js';
 
+const viewportWidthLimit = 750;
 const activePage = document.getElementsByTagName("main")[0].getAttribute("activePage") as string;
 const projectsNav = document.querySelector("body nav + nav") as HTMLElement;
 
@@ -81,61 +12,33 @@ const burgerMenuButton = document.querySelector("body>div") as HTMLElement;
 const navs = document.querySelectorAll("nav") as NodeListOf<HTMLElement>;
 const main = document.querySelector("main") as HTMLElement;
 
-const viewportWidth = window.innerWidth;
-const viewportHeight = window.innerHeight;
 
 let projectList: Map<string, Map<string, Project>> = new Map();
 
 let imageIndexToDisplay = 0;
 
-enum CssClasses {
-  underlined = "underlined",
-  isDisplayed = "isDisplayed",
-  hidden = "hidden",
-  visible = "visible",
-}
-
-enum ImageViewer {
-  previous = -1,
-  next = +1
-}
-
-interface Project {
-  readonly title: string;
-  readonly context: string;
-  readonly details: string;
-  readonly tools: string;
-  readonly learned: string;
-  readonly images: Image[]
-}
-
-interface Image {
-  readonly src: string;
-  readonly alt: string;
-  readonly title: string;
-}
 
 init();
+hideNavs();
 
 switch (activePage) {
   case "Projects":
     buildProjects();
     break;
   case "Experiences":
-<<<<<<< Updated upstream:scripts/script.ts
-  // new ExperiencesLoader();
-=======
     new ExperiencesLoader();
     break;
   case "Skills":
     new Bar();
+    new Pie();
+    new Radar();
+    break;
   default:
     break;
->>>>>>> Stashed changes:src/scripts/script.ts
 }
 
 function hideNavs() {
-  if (viewportHeight < 600 || viewportWidth < 1000)
+  if (window.innerWidth < viewportWidthLimit)
 
     navs.forEach(nav => {
       nav.classList.add(CssClasses.hidden);
@@ -144,7 +47,7 @@ function hideNavs() {
 }
 
 function displayNavs() {
-  if (viewportHeight < 600 || viewportWidth < 1000)
+  if (window.innerWidth < viewportWidthLimit)
     navs.forEach(nav => {
       nav.classList.remove(CssClasses.hidden);
       nav.classList.add(CssClasses.visible);
@@ -163,7 +66,7 @@ function onDetailsOpen(details: HTMLDetailsElement) {
 
 
 function onResizeNavHidder() {
-  if (viewportHeight < 600 || viewportWidth < 1000) {
+  if (window.innerWidth < viewportWidthLimit) {
     navs.forEach(nav => {
       nav.classList.remove(CssClasses.visible);
       nav.classList.add(CssClasses.hidden);
@@ -171,15 +74,13 @@ function onResizeNavHidder() {
 
   } else {
     navs.forEach(nav => {
-      nav.classList.remove(CssClasses.visible);
+      nav.classList.add(CssClasses.visible);
       nav.classList.remove(CssClasses.hidden);
     })
   }
 }
 
 function init() {
-  console.log("init")
-
   document.getElementById(activePage)?.classList.add(CssClasses.underlined);
 
   window.addEventListener('resize', onResizeNavHidder);
@@ -200,45 +101,27 @@ function init() {
 
 function buildProjects() {
 
-  import("./project.json")
-    .then((rawProjects) => {
-      let returnedMap: Map<string, Map<string, Project>> = new Map();
-      new Map(Object.entries(rawProjects)).forEach((projects, context) => {
 
-<<<<<<< Updated upstream:scripts/script.ts
-        let tempMap: Map<string, Project> = new Map();
+  fetch("/ressources/project.json")
+    .then(response => response.json())
+    .then((_projects) => {
 
-        new Map(Object.entries(projects)).forEach((project: Project) => {
-          tempMap.set(project.title, project);
-        })
+      Object.keys(_projects).forEach((context) => {
+        let projectsMap: Map<string, Project> = new Map();
 
-        projectList.set(context, tempMap);
-=======
-  import("../ressources/project.json")
-    .then((rawProjects) => {
+        _projects[context].forEach((p: Project) => {
+          projectsMap.set(p.title, p);
+        });
 
-      new Map(Object.entries(rawProjects)).forEach((projects, context) => {
-        if (context !== "default") {
-          let tempMap: Map<string, Project> = new Map();
-
-          new Map(Object.entries(projects)).forEach((project: Project) => {
-            tempMap.set(project.title, project);
-          })
-
-          projectList.set(context, tempMap);
-
-        }
->>>>>>> Stashed changes:src/scripts/script.ts
-
+        projectList.set(context, projectsMap);
       })
-
     })
     .then(() => buildProjectNav());
 
 }
 
 function buildProjectNav() {
-  console.log("buildProjectNav")
+
   projectList.forEach((projects, context) => {
     let details = document.createElement("details");
     details.addEventListener("toggle", () => onDetailsOpen(details));
@@ -247,15 +130,10 @@ function buildProjectNav() {
 
     summary.innerHTML = context;
     details.appendChild(summary);
-
-    projects.forEach((project: Project) => {
+    projects.forEach((project) => {
       let li = document.createElement("li");
       li.innerHTML = project.title;
-<<<<<<< Updated upstream:scripts/script.ts
-      li.addEventListener("click", (e) => { buildProjectHTML([li, summary]); e.stopPropagation() });
-=======
-      li.addEventListener("click", () => buildProjectHTML([li, summary]));
->>>>>>> Stashed changes:src/scripts/script.ts
+      li.addEventListener("click", ()=>buildProjectHTML([li, summary]));
       li.addEventListener("click", hideNavs);
       ul.appendChild(li);
     });
@@ -270,9 +148,7 @@ function buildProjectNav() {
 }
 
 function buildProjectHTML(elementsToUnderline: [HTMLLIElement, HTMLElement]) {
-  console.log("buildProjectHTML")
 
-  console.log(elementsToUnderline)
 
   imageIndexToDisplay = 0;
   main.innerHTML = "";
@@ -300,38 +176,28 @@ function buildProjectHTML(elementsToUnderline: [HTMLLIElement, HTMLElement]) {
 
   ]);
 
-  let image = clickedProject?.images[imageIndexToDisplay];
+  let image = clickedProject?.images[imageIndexToDisplay]
   let figureSelectorContainer = createElement("div", null, { class: "figures-container" });
 
-  if (image != undefined) {
-<<<<<<< Updated upstream:scripts/script.ts
-=======
+  if(image != undefined){
 
     let figureSelector = [
       appendChildren(
-        createElement("figure"),
-        [createElement("img", null, { src: image.src, alt: image.alt, title: image.title })]
+      createElement("figure"),
+      [createElement("img", null, { src: image.src, alt: image.alt, title: image.title })]
       )
     ]
 
-    if (clickedProject?.images?.length === undefined || clickedProject?.images?.length > 1) {
-      figureSelector.unshift(createImgAsButton((e: MouseEvent) => changeImage(e, Viewer.previous, clickedProject?.images), { class: "image-button" }))
-      figureSelector.push(createImgAsButton((e: MouseEvent) => changeImage(e, Viewer.next, clickedProject?.images), { class: "image-button previousButton" }))
+    if(clickedProject?.images?.length === undefined || clickedProject?.images?.length > 1){
+      figureSelector.unshift(createImgAsButton((e: MouseEvent) => changeImage(e, Viewer.previous, clickedProject?.images), { class: "image-button"}))
+      figureSelector.push(createImgAsButton((e: MouseEvent) => changeImage(e, Viewer.next, clickedProject?.images), { class: "image-button previousButton"}))
     }
 
->>>>>>> Stashed changes:src/scripts/script.ts
     appendChildren(
       figureSelectorContainer,
-      [createImgAsButton((e: MouseEvent) => changeImage(e, ImageViewer.previous, clickedProject?.images), { class: "image-button" }),
-      appendChildren(
-        createElement("figure"),
-        [createElement("img", null, { src: image.src, alt: image.alt, title: image.title })]
-      ),
-      createImgAsButton((e: MouseEvent) => changeImage(e, ImageViewer.next, clickedProject?.images), { class: "image-button previousButton" })
-      ]
+      figureSelector
     )
   }
-
 
   appendChildren(main, [
     createElement("h2", clickedProject?.title),
@@ -344,74 +210,3 @@ function buildProjectHTML(elementsToUnderline: [HTMLLIElement, HTMLElement]) {
   ])
 
 }
-
-function changeImage(e: MouseEvent, view: ImageViewer, images: Image[] | null | undefined) {
-  imageIndexToDisplay += view;
-
-  if (images != undefined) {
-    if (imageIndexToDisplay < 0 && images) {
-      imageIndexToDisplay = images.length - 1
-    } else if (imageIndexToDisplay > images.length - 1) {
-      imageIndexToDisplay = 0;
-    }
-
-    let figure = (e.target as HTMLElement).parentElement?.querySelector("figure") as HTMLElement;
-
-    let img = figure.querySelector("img") as HTMLImageElement;
-
-    figure.removeChild(img);
-
-    img.src = images[imageIndexToDisplay].src;
-    img.alt = images[imageIndexToDisplay].alt;
-    img.title = images[imageIndexToDisplay].title;
-
-    figure.appendChild(img);
-  }
-}
-
-
-async function loadProjects(): Promise<Map<string, Project[]>> {
-  return fetch("/scripts/project.json")
-    .then(response => response.json());
-}
-
-
-function createElement(elementTag: string, innerHTML: string | null = null, attributes: Record<string, any> | null = null): HTMLElement {
-  let element = document.createElement(elementTag);
-
-  if (innerHTML != null) {
-    element.innerHTML = innerHTML;
-  }
-
-  if (attributes != null) {
-    Object.keys(attributes).forEach((key) => {
-      element.setAttribute(key, attributes[key]);
-    });
-  }
-  return element;
-}
-
-function appendChildren(element: HTMLElement, children: HTMLElement[]): HTMLElement {
-  children.forEach(child => {
-    element.appendChild(child);
-  })
-  return element;
-}
-
-
-function createImgAsButton(callBack: ((this: GlobalEventHandlers, ev: MouseEvent) => any) | null, attributes: Record<string, string> | null = null, src: string = "/images/chevron.png") {
-
-  let button = createElement("img", null, { src })
-
-  if (attributes != null) {
-    Object.keys(attributes).forEach((key) => {
-      button.setAttribute(key, attributes[key]);
-    });
-  }
-
-  button.onclick = callBack;
-
-  return button;
-}
-
-
