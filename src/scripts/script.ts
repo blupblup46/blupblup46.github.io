@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:scripts/script.ts
 // import { ExperiencesLoader } from "./Experiences";
 import Chart from '../node_modules/chart.js/auto'
 import projects from './project.json';
@@ -65,6 +66,13 @@ function generateCanvas() {
 }
 
 setInterval(generateCanvas, 1000)
+=======
+import { Bar } from "./Charts.js";
+import { appendChildren, changeImage, createElement, createImgAsButton } from "./DOM.js";
+import { ExperiencesLoader } from "./Experiences.js";
+import type { Image, Project } from './utils.js';
+import { CssClasses, Viewer } from './utils.js';
+>>>>>>> Stashed changes:src/scripts/script.ts
 
 const activePage = document.getElementsByTagName("main")[0].getAttribute("activePage") as string;
 const projectsNav = document.querySelector("body nav + nav") as HTMLElement;
@@ -114,7 +122,16 @@ switch (activePage) {
     buildProjects();
     break;
   case "Experiences":
+<<<<<<< Updated upstream:scripts/script.ts
   // new ExperiencesLoader();
+=======
+    new ExperiencesLoader();
+    break;
+  case "Skills":
+    new Bar();
+  default:
+    break;
+>>>>>>> Stashed changes:src/scripts/script.ts
 }
 
 function hideNavs() {
@@ -188,6 +205,7 @@ function buildProjects() {
       let returnedMap: Map<string, Map<string, Project>> = new Map();
       new Map(Object.entries(rawProjects)).forEach((projects, context) => {
 
+<<<<<<< Updated upstream:scripts/script.ts
         let tempMap: Map<string, Project> = new Map();
 
         new Map(Object.entries(projects)).forEach((project: Project) => {
@@ -195,6 +213,22 @@ function buildProjects() {
         })
 
         projectList.set(context, tempMap);
+=======
+  import("../ressources/project.json")
+    .then((rawProjects) => {
+
+      new Map(Object.entries(rawProjects)).forEach((projects, context) => {
+        if (context !== "default") {
+          let tempMap: Map<string, Project> = new Map();
+
+          new Map(Object.entries(projects)).forEach((project: Project) => {
+            tempMap.set(project.title, project);
+          })
+
+          projectList.set(context, tempMap);
+
+        }
+>>>>>>> Stashed changes:src/scripts/script.ts
 
       })
 
@@ -217,7 +251,11 @@ function buildProjectNav() {
     projects.forEach((project: Project) => {
       let li = document.createElement("li");
       li.innerHTML = project.title;
+<<<<<<< Updated upstream:scripts/script.ts
       li.addEventListener("click", (e) => { buildProjectHTML([li, summary]); e.stopPropagation() });
+=======
+      li.addEventListener("click", () => buildProjectHTML([li, summary]));
+>>>>>>> Stashed changes:src/scripts/script.ts
       li.addEventListener("click", hideNavs);
       ul.appendChild(li);
     });
@@ -266,6 +304,22 @@ function buildProjectHTML(elementsToUnderline: [HTMLLIElement, HTMLElement]) {
   let figureSelectorContainer = createElement("div", null, { class: "figures-container" });
 
   if (image != undefined) {
+<<<<<<< Updated upstream:scripts/script.ts
+=======
+
+    let figureSelector = [
+      appendChildren(
+        createElement("figure"),
+        [createElement("img", null, { src: image.src, alt: image.alt, title: image.title })]
+      )
+    ]
+
+    if (clickedProject?.images?.length === undefined || clickedProject?.images?.length > 1) {
+      figureSelector.unshift(createImgAsButton((e: MouseEvent) => changeImage(e, Viewer.previous, clickedProject?.images), { class: "image-button" }))
+      figureSelector.push(createImgAsButton((e: MouseEvent) => changeImage(e, Viewer.next, clickedProject?.images), { class: "image-button previousButton" }))
+    }
+
+>>>>>>> Stashed changes:src/scripts/script.ts
     appendChildren(
       figureSelectorContainer,
       [createImgAsButton((e: MouseEvent) => changeImage(e, ImageViewer.previous, clickedProject?.images), { class: "image-button" }),

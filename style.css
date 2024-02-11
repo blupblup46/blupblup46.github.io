@@ -16,6 +16,27 @@
     --white: #efefef;
   }
 
+<<<<<<< Updated upstream:style.css
+=======
+/* #Skills{
+    display: none;
+} */
+
+
+.previousButton{
+    transform: rotate(180deg);
+}
+
+.image-button{
+    height: 50px;
+    width: 50px;
+    border: none;
+}
+
+.image-button:hover{
+    cursor: pointer;
+}
+>>>>>>> Stashed changes:pages/style.css
 
 body{
     z-index: 0;

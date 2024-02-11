@@ -7,6 +7,7 @@ interface Experience{
     readonly learned: Learned;
 }
 
+<<<<<<< Updated upstream:scripts/Experiences.ts
 interface Learned{
     readonly element: string;
     readonly comment: string;
@@ -18,6 +19,10 @@ export class ExperiencesLoader{
     readonly experiences: Experience[]|null;
 
     indexOfExperience: number = 0;
+=======
+export class ExperiencesLoader {
+    main: HTMLElement;
+>>>>>>> Stashed changes:src/scripts/Experiences.ts
 
     constructor(){
         this.main = document.querySelector("main") as HTMLElement;
