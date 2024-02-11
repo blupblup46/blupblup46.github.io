@@ -3,31 +3,68 @@ import Chart from '../node_modules/chart.js/auto'
 import projects from './project.json';
 
 console.log("ui")
-const data = [
-  { year: 2010, count: 10 },
-  { year: 2011, count: 20 },
-  { year: 2012, count: 15 },
-  { year: 2013, count: 25 },
-  { year: 2014, count: 22 },
-  { year: 2015, count: 30 },
-  { year: 2016, count: 28 },
-];
+let chart: Chart;
 
-new Chart(
-  document.getElementById('acquisitions') as HTMLCanvasElement,
-  {
-    type: 'bar',
-    data: {
-      labels: data.map(row => row.year),
-      datasets: [
-        {
-          label: 'Acquisitions by year',
-          data: data.map(row => row.count)
+function getRandom() {
+  return Math.random() * 100;
+}
+
+function generateCanvas() {
+  console.log("gen")
+
+  const data = [
+    { year: 2010, count: getRandom() },
+    { year: 2011, count: getRandom() },
+    { year: 2012, count: getRandom() },
+    { year: 2013, count: getRandom() },
+    { year: 2014, count: getRandom() },
+    { year: 2015, count: getRandom() },
+    { year: 2016, count: getRandom() },
+  ];
+
+  console.log(chart)
+  if (chart == null) {
+    chart = new Chart(
+      document.getElementById('acquisitions') as HTMLCanvasElement,
+      {
+        type: 'bar',
+        data: {
+          labels: data.map(row => row.year),
+          datasets: [
+            {
+              data: data.map(row => row.count),
+              borderRadius: 10
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+         
+          scales: {
+            y: {
+              display: false
+            }
+          },
+
+          plugins:{
+            legend: {
+              display: false
+            }
+          }
         }
-      ]
-    }
+      }
+    )
+  } else {
+    chart.data.datasets.forEach(dataset => {
+      dataset.data = data.map(row => row.count);
+    });
+
+    chart.update();
   }
-);
+
+}
+
+setInterval(generateCanvas, 1000)
 
 const activePage = document.getElementsByTagName("main")[0].getAttribute("activePage") as string;
 const projectsNav = document.querySelector("body nav + nav") as HTMLElement;
@@ -77,7 +114,7 @@ switch (activePage) {
     buildProjects();
     break;
   case "Experiences":
-    // new ExperiencesLoader();
+  // new ExperiencesLoader();
 }
 
 function hideNavs() {
@@ -148,12 +185,12 @@ function buildProjects() {
 
   import("./project.json")
     .then((rawProjects) => {
-      let returnedMap : Map<string, Map<string, Project>> = new Map();
-      new Map (Object.entries(rawProjects)).forEach((projects, context)=>{
+      let returnedMap: Map<string, Map<string, Project>> = new Map();
+      new Map(Object.entries(rawProjects)).forEach((projects, context) => {
 
-        let tempMap : Map<string, Project>= new Map();
+        let tempMap: Map<string, Project> = new Map();
 
-        new Map (Object.entries(projects)).forEach((project : Project) => {
+        new Map(Object.entries(projects)).forEach((project: Project) => {
           tempMap.set(project.title, project);
         })
 
@@ -180,7 +217,7 @@ function buildProjectNav() {
     projects.forEach((project: Project) => {
       let li = document.createElement("li");
       li.innerHTML = project.title;
-      li.addEventListener("click", (e)=>{buildProjectHTML([li, summary]); e.stopPropagation()});
+      li.addEventListener("click", (e) => { buildProjectHTML([li, summary]); e.stopPropagation() });
       li.addEventListener("click", hideNavs);
       ul.appendChild(li);
     });
@@ -228,7 +265,7 @@ function buildProjectHTML(elementsToUnderline: [HTMLLIElement, HTMLElement]) {
   let image = clickedProject?.images[imageIndexToDisplay];
   let figureSelectorContainer = createElement("div", null, { class: "figures-container" });
 
-  if(image != undefined){
+  if (image != undefined) {
     appendChildren(
       figureSelectorContainer,
       [createImgAsButton((e: MouseEvent) => changeImage(e, ImageViewer.previous, clickedProject?.images), { class: "image-button" }),
@@ -240,7 +277,7 @@ function buildProjectHTML(elementsToUnderline: [HTMLLIElement, HTMLElement]) {
       ]
     )
   }
- 
+
 
   appendChildren(main, [
     createElement("h2", clickedProject?.title),
@@ -254,26 +291,26 @@ function buildProjectHTML(elementsToUnderline: [HTMLLIElement, HTMLElement]) {
 
 }
 
-function changeImage(e: MouseEvent, view: ImageViewer, images: Image[]|null|undefined) {
+function changeImage(e: MouseEvent, view: ImageViewer, images: Image[] | null | undefined) {
   imageIndexToDisplay += view;
 
-  if(images != undefined){
+  if (images != undefined) {
     if (imageIndexToDisplay < 0 && images) {
       imageIndexToDisplay = images.length - 1
     } else if (imageIndexToDisplay > images.length - 1) {
       imageIndexToDisplay = 0;
     }
-  
+
     let figure = (e.target as HTMLElement).parentElement?.querySelector("figure") as HTMLElement;
-  
+
     let img = figure.querySelector("img") as HTMLImageElement;
-  
+
     figure.removeChild(img);
-  
+
     img.src = images[imageIndexToDisplay].src;
     img.alt = images[imageIndexToDisplay].alt;
     img.title = images[imageIndexToDisplay].title;
-  
+
     figure.appendChild(img);
   }
 }
