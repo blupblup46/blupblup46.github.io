@@ -8,7 +8,7 @@ enum ChartType {
 
 abstract class ChartBuilder {
     readonly options = {
-        responsive: true,
+        responsive: false,
 
         scales: {
             y: {

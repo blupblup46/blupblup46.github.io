@@ -1,36 +1,36 @@
 @font-face {
     font-family: "PWix";
     src: url("/fonts/bahij_janna-regular-webfont.woff2") format("woff2"),
-         url("/fonts/bahij_janna-regular-webfont.woff") format("woff");
+        url("/fonts/bahij_janna-regular-webfont.woff") format("woff");
 }
 
 @font-face {
     font-family: "PWixBold";
     src: url("/fonts/bahij_janna-bold-webfont.woff2") format("woff2"),
-         url("/fonts/bahij_janna-bold-webfont.woff") format("woff");
+        url("/fonts/bahij_janna-bold-webfont.woff") format("woff");
 }
 
 :root {
     --mainColor: #29ab87;
     --secondaryColor: #298eab;
     --white: #efefef;
-  }
+}
 
-.previousButton{
+.previousButton {
     transform: rotate(180deg);
 }
 
-.image-button{
+.image-button {
     height: 50px;
     width: 50px;
     border: none;
 }
 
-.image-button:hover{
+.image-button:hover {
     cursor: pointer;
 }
 
-body{
+body {
     z-index: 0;
     background-color: var(--white);
     font-size: large;
@@ -38,49 +38,57 @@ body{
     text-justify: auto;
 }
 
-p{
+p {
     font-family: PWix, Arial, Helvetica, sans-serif;
     line-height: 1.25em;
     text-align: left;
     padding: 0em 2em;
 }
 
-strong, h1{
+strong,
+h1 {
     color: var(--mainColor);
 }
 
-h1, h2, h3, h4{
+h1,
+h2,
+h3,
+h4 {
     font-family: PWix, Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
 
-h1{
+h1 {
     font-size: 3em;
     text-align: center;
 
 }
 
-h2{
+h2 {
     font-size: 1.5em;
     text-align: center;
     width: 100%;
 }
 
-h3, h4{
+h3,
+h4 {
     padding: 0em;
     margin: 0em;
 }
 
-h4{
+h4 {
     font-size: 1em;
 }
 
-h2, h3, h4, a{
+h2,
+h3,
+h4,
+a {
     color: var(--secondaryColor);
 
 }
 
-ul{
+ul {
     font-family: PWix, Arial, Helvetica, sans-serif;
     list-style: none;
     padding: 0em;
@@ -92,46 +100,47 @@ ul{
     margin: 1.5em;
 }
 
-summary{
+summary {
     font-family: PWix, Arial, Helvetica, sans-serif;
     /* font-weight: bold; */
 }
 
-.underlined{
+.underlined {
     text-decoration: underline;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.visible{
+.visible {
     display: flex;
     z-index: 1000;
 }
 
 ul a {
-    text-decoration: none;    
+    text-decoration: none;
     font-family: PWixBold;
     font-size: larger;
     color: var(--white);
 }
 
-details:hover{
+details:hover {
     cursor: pointer;
 }
 
-@keyframes slide{
-    from{
+@keyframes slide {
+    from {
         transform: translate(-1000px);
 
     }
-    to{
+
+    to {
         transform: translate(0px);
     }
 }
 
-nav{
+nav {
     float: left;
     display: flex;
     align-items: center;
@@ -148,13 +157,13 @@ nav{
 
 }
 
-body nav + nav {
+body nav+nav {
     z-index: 1;
     font-size: medium;
 }
 
 
-body>div img{
+body>div img {
     width: 50px;
     height: 50px;
     position: fixed;
@@ -162,7 +171,7 @@ body>div img{
     left: 0px;
 }
 
-body>div{
+body>div {
     width: 50px;
     height: 50px;
     position: fixed;
@@ -171,31 +180,32 @@ body>div{
     background-color: var(--mainColor);
     border-radius: 0px 0px 10px 0px;
     display: none;
-    z-index: 10000 ;
+    z-index: 10000;
 }
 
 
 
-html, body{
+html,
+body {
     display: flex;
     flex-direction: row;
-    padding:0px;
+    padding: 0px;
     margin: 0px;
     width: 100%;
     position: absolute;
-    top:0px;
+    top: 0px;
 }
 
-main{
+main {
     display: flex;
     justify-content: center;
     align-items: center;
-    float: left;    
+    float: left;
     background-color: var(--white);
     width: 100%;
 }
 
-figure{
+figure {
     display: flex;
     justify-content: center;
 }
@@ -204,25 +214,25 @@ figure{
 
 /* SECOND NAV */
 
-body nav + nav{
+body nav+nav {
     background-color: var(--secondaryColor);
-    display:flex;
-    flex-basis:200px;
+    display: flex;
+    flex-basis: 200px;
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    
+
 }
 
-body nav + nav ul{
+body nav+nav ul {
     height: auto;
 }
 
-body nav + nav details{
+body nav+nav details {
     margin: 1em;
 }
 
-body nav + nav li{
+body nav+nav li {
     margin-top: 1em;
     list-style: disc;
 }
@@ -230,102 +240,102 @@ body nav + nav li{
 
 /* INTRO */
 
-main[activePage="Intro"]{
+main[activePage="Intro"] {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-main[activePage="Intro"] article{
+main[activePage="Intro"] article {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-main[activePage="Intro"] article>figure img{
+main[activePage="Intro"] article>figure img {
     max-width: 80%;
     height: auto;
 }
 
-main[activePage="Intro"] article:last-child{
+main[activePage="Intro"] article:last-child {
     margin-top: 5%;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
 
-main[activePage="Intro"] article:last-child img{
+main[activePage="Intro"] article:last-child img {
     max-height: 5em;
 }
 
-main[activePage="Intro"] article:last-child img:hover{
+main[activePage="Intro"] article:last-child img:hover {
     cursor: pointer;
 }
 
 /* PROJECTS */
 
-main[activePage="Projects"]{
+main[activePage="Projects"] {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-main[activePage="Projects"] div figure img{
+main[activePage="Projects"] div figure img {
     width: 40vh;
 }
 
-main[activePage="Projects"] div{
+main[activePage="Projects"] div {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-main[activePage="Projects"] .project-container{
+main[activePage="Projects"] .project-container {
     display: flex;
     flex-direction: row-reverse;
 }
 
 
-main[activePage="Projects"] .figures-container{
+main[activePage="Projects"] .figures-container {
     display: flex;
     flex-direction: row-reverse;
 }
 
-main[activePage="Projects"] .figures-container figure{
+main[activePage="Projects"] .figures-container figure {
     margin: 0px;
 }
 
-main[activePage="Projects"] .project-container{
+main[activePage="Projects"] .project-container {
     padding: 1em;
 }
 
 /* EDUCATION */
 
-main[activePage="Education"]{
+main[activePage="Education"] {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-main[activePage="Education"] section{
+main[activePage="Education"] section {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 1em;
     padding: 0em 1em;
-    box-shadow: 1px 1px 3px 1px ;
+    box-shadow: 1px 1px 3px 1px;
     border-radius: 10px;
     width: 70%;
 }
 
 main[activePage="Education"] section figure {
-   margin: 0;
-   padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-main[activePage="Education"] section > div{
+main[activePage="Education"] section>div {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -333,33 +343,33 @@ main[activePage="Education"] section > div{
     width: 100%;
 }
 
-main[activePage="Education"] section > div h3,
-main[activePage="Education"] section > div h2{
-   padding: 0px;
-   margin: 0px;
+main[activePage="Education"] section>div h3,
+main[activePage="Education"] section>div h2 {
+    padding: 0px;
+    margin: 0px;
 }
 
-main[activePage="Education"] img{
+main[activePage="Education"] img {
     max-width: 100%;
-    height: auto;    
-    display: block;  
+    height: auto;
+    display: block;
     margin: 0;
-    padding: 0; 
+    padding: 0;
 }
 
 /* Experiences */
 
-main[activePage="Experiences"] p{
+main[activePage="Experiences"] p {
     padding: 0;
     margin: 0;
 }
 
-main[activePage="Experiences"] h1{
+main[activePage="Experiences"] h1 {
     padding: 0;
     margin: 0;
 }
 
-main[activePage="Experiences"] article{
+main[activePage="Experiences"] article {
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -367,22 +377,22 @@ main[activePage="Experiences"] article{
     padding: 0 5em;
 }
 
-main[activePage="Experiences"] section:first-of-type{
+main[activePage="Experiences"] section:first-of-type {
     display: flex;
     flex-direction: row;
 }
 
-main[activePage="Experiences"] section:first-of-type section{
+main[activePage="Experiences"] section:first-of-type section {
     display: flex;
     flex-direction: column;
     margin: 10px;
 }
 
-main[activePage="Experiences"] div{
+main[activePage="Experiences"] div {
     padding-bottom: 1em;
 }
 
-main[activePage="Experiences"] .description{
+main[activePage="Experiences"] .description {
     width: 100%;
 }
 
@@ -395,11 +405,11 @@ main[activePage="Contact"] {
     align-content: center;
 }
 
-main[activePage="Contact"] figure img{
+main[activePage="Contact"] figure img {
     width: 60%;
 }
 
-main[activePage="Contact"] article{
+main[activePage="Contact"] article {
     margin: 1em;
     border-radius: 20px;
     box-shadow: 5px 5px 10px 1px grey;
@@ -411,45 +421,81 @@ main[activePage="Contact"] article{
     justify-content: center;
 }
 
-main[activePage="Contact"] p{
-   text-align: center;
-   font-size: 1.25em;
-   vertical-align: baseline;
+main[activePage="Contact"] p {
+    text-align: center;
+    font-size: 1.25em;
+    vertical-align: baseline;
 
 }
 
-main[activePage="Contact"] p a img{
-    height: 30px;
+main[activePage="Contact"] p a img {
     vertical-align: top;
 
- 
- }
+
+}
+
+/* SKILLS */
+main[activePage="Skills"]{
+    flex-direction: column;
+    display: flex;
+}
+
+main[activePage="Skills"] article{
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+}
+
+main[activePage="Skills"] article .top{
+    justify-content: space-around !important;
+}
+
+
+main[activePage="Skills"] div {
+    display: flex;
+    /* justify-content: center; */
+    height: 100%;
+    width: 33%;
+
+}
+
+/* main[activePage="Skills"] .top {
+    align-items: flex-start;
+}
+
+main[activePage="Skills"] .bottom {
+    align-items: flex-end;
+}
+
+main[activePage="Skills"] canvas {
+    width: 80%;
+} */
+
+
+@media (width < 1300px) {
 
 
 
-@media (width < 1300px){
-
-  
-
-    main[activePage="Intro"], main[activePage="Intro"] article{
+    main[activePage="Intro"],
+    main[activePage="Intro"] article {
         flex-direction: column;
     }
 
-    main[activePage="Intro"] article:last-child{
+    main[activePage="Intro"] article:last-child {
         flex-direction: row;
 
     }
 
-    main[activePage="Intro"] img{
+    main[activePage="Intro"] img {
         width: 70px;
     }
 
-    main[activePage="Intro"] article > figure img{
+    main[activePage="Intro"] article>figure img {
         width: 80%;
     }
 
 
-    main[activePage="Projects"] div.project-container{
+    main[activePage="Projects"] div.project-container {
         flex-direction: column-reverse;
     }
 
@@ -458,15 +504,15 @@ main[activePage="Contact"] p a img{
     }
 
     main[activePage="Projects"] div figure img {
-        width:30vh;
+        width: 30vh;
     }
 
-    main[activePage="Experiences"] section:first-of-type{
+    main[activePage="Experiences"] section:first-of-type {
         display: flex;
         flex-direction: column;
     }
 
-    main[activePage="Experiences"] article{
+    main[activePage="Experiences"] article {
         padding: 10px;
     }
 
@@ -475,12 +521,12 @@ main[activePage="Contact"] p a img{
         flex-wrap: nowrap;
     }
 
-    main[activePage="Contact"] figure img{
+    main[activePage="Contact"] figure img {
         width: auto;
         height: 80px;
     }
 
-    main[activePage="Contact"] article{
+    main[activePage="Contact"] article {
         margin: 0.5em;
         border-radius: 20px;
         box-shadow: 5px 5px 10px 1px grey;
@@ -493,40 +539,41 @@ main[activePage="Contact"] p a img{
     }
 }
 
-@media (width < 750px){
-  
+@media (width < 750px) {
 
-    body main{
-       margin-top: 1em !important;
+
+    body main {
+        margin-top: 1em !important;
     }
 
-    p{
+    p {
         font-size: 0.9em;
     }
 
-    h1{
+    h1 {
         font-size: 1.5em;
     }
 
-    h2, h3{
+    h2,
+    h3 {
         font-size: 1.2em;
     }
 
-    body>div{
+    body>div {
         display: block;
     }
 
-    nav{
+    nav {
         position: fixed;
-        left:0px;
+        left: 0px;
         width: 50%;
-        animation: slide 0.25s ;
+        animation: slide 0.25s;
 
     }
-    
-    body nav + nav {
-        left:50%;
+
+    body nav+nav {
+        left: 50%;
     }
 
-   
+
 }
